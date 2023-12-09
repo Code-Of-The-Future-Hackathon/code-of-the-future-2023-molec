@@ -10,4 +10,8 @@ from .doctor import(
 )
 from .schedule import(
     create_doctor_schedule_table,
+    set_default_schedule,
+    set_default_schedule_av_hours,
+    save_doctor_schedule,
+    get_doctor_schedule,
 )
