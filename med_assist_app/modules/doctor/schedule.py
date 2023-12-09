@@ -1,3 +1,5 @@
+import sqlite3
+
 def create_doctor_schedule_table():
     try:
         dc_schedule = sqlite3.connect(r'C:\Users\MSI\Desktop\MedAssist\user_profiles.db')

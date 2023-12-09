@@ -1,4 +1,7 @@
 import sqlite3
+import re
+import PyPDF2
+
 
 def create_connection():
     conn = sqlite3.connect(r'C:\Users\MSI\Desktop\MedAssist\user_profiles.db')
@@ -146,3 +149,14 @@ def get_user_appointments(username):
 
     conn.close()
     return appointments
+
+def findWholeWord(w):
+    return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
+
+def extract_text_from_pdf(pdf_file):
+    text = ""
+    pdf_reader = PyPDF2.PdfReader(pdf_file)
+    for page_number in range(len(pdf_reader.pages)):
+        page = pdf_reader.pages[page_number]
+        text += page.extract_text()
+    return text

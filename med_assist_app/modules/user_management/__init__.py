@@ -14,4 +14,6 @@ from .user import(
     get_pregnancies_of_user,
     get_user_role,
     get_user_appointments,
+    findWholeWord,
+    extract_text_from_pdf,
 )

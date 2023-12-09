@@ -1,3 +1,5 @@
+import sqlite3
+
 def create_appointed_hours_table():
     try:
         conn = sqlite3.connect(r'C:\Users\MSI\Desktop\MedAssist\user_profiles.db')
