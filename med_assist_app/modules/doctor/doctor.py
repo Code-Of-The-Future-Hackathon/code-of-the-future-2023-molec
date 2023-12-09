@@ -1,5 +1,5 @@
 import sqlite3
-import datetime
+from datetime import datetime as dt
 import json
 import streamlit as st
 
@@ -29,7 +29,7 @@ def create_doctor_table():
         print("Error creating table:", e)
 
 def get_day_of_week(date):
-    return datetime.strptime(date, '%Y-%m-%d').strftime('%A')
+    return dt.strptime(date, '%Y-%m-%d').strftime('%A')
 
 def save_doc_info(first_name, last_name, email, specialty, city, telephone):
     try:
@@ -149,4 +149,5 @@ def get_doctor_appointments(doctor_username):
     except sqlite3.Error as e:
         print("Error fetching doctor appointments:", e)
         return []
+    
     

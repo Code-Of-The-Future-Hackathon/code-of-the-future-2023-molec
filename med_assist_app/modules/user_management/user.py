@@ -1,6 +1,7 @@
 import sqlite3
 import re
 import PyPDF2
+import streamlit as st
 
 
 def create_connection():
@@ -73,6 +74,29 @@ def save_user_profile(conn, user_id, age, sex, pregnancies, height, weight, resu
     except sqlite3.Error as e:
         print(f"Error occurred: {e}")
 
+def init_session_state():
+    if 'data' not in st.session_state:
+        st.session_state.data = True
+
+def check_parameters_filled(age, sex, height, kilo):
+    if age is None or sex is None or height is None or kilo is None or age == 0 or height == 0 or kilo == 0:
+        return False  
+    return True  
+
+def save_appointment(doctor_username, user_id, appointment_date, appointment_hour):
+    try:
+        conn = sqlite3.connect(r'C:\Users\MSI\Desktop\MedAssist\user_profiles.db')
+        cursor = conn.cursor()
+
+        cursor.execute('''
+            INSERT INTO appointed_hours (doctor_username, user_id, appointment_date, appointment_hour)
+            VALUES (?, ?, ?, ?)
+        ''', (doctor_username, user_id, appointment_date, appointment_hour))
+
+        conn.commit()
+        conn.close()
+    except sqlite3.Error as e:
+        st.error(f"Error saving appointment: {e}")
 def save_user_result(conn, user_id, result):
     try:
         cursor = conn.cursor()
